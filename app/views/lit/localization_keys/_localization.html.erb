@@ -1,0 +1,50 @@
+<% available_locales = I18n.backend.available_locales %>
+
+<table class="table table-striped">
+  <thead>
+    <tr class="localization_key_row" data-id="<%= localization.id %>">
+        <th>
+          <%= localization.localization_key %>
+          <span class="badge"><%= Lit.init.cache.get_global_hits_counter(localization.localization_key) %></span>
+        </th>
+        <th>
+          <div class="localization_keys_options pull-right">
+            <%= link_to lit.star_localization_key_path(localization), :remote => true, :class => "star_icon" do %>
+                <%= draw_icon localization.is_starred? ? 'star' : 'star-empty' %>
+            <% end %>
+            <%= link_to lit.localization_key_path(localization), :method => :delete, :data => {:confirm => t('lit.common.you_sure', :default => "Are you sure?")}, :remote => true do %>
+                <%= draw_icon 'trash' %>
+            <% end %>
+          </div>
+        </th>
+      </tr>
+  </thead>
+  <tbody>
+  <%- available_locales.each do |locale| %>
+      <%- lk = localization_for(locale, localization) %>
+      <tr class="localization_locale">
+        <td class="localization_row" width="70%" data-id="<%= lk.id %>" data-edit="<%= edit_localization_key_localization_path(localization, lk) %>" data-editing=0 data-content="">
+          <%= render :partial => "localization_row", :locals => {:localization => Lit.init.cache["#{locale}.#{localization.localization_key}"]} %>
+        </td>
+        <td class="locale_row" width="30%" >
+          <div class="pull-right">
+              <% if lk %>
+                  <%= link_to lit.previous_versions_localization_key_localization_path(localization, lk), :class => "show_prev_versions #{'hidden' unless has_versions?(lk)}", :remote => true do %>
+                      <%= draw_icon 'random', :title => t('lit.common.previous_versions', :default => "Previous versions") %>
+                  <% end %>
+              <% end %>
+
+            <%= image_tag "lit/famfamfam_flags/#{locale[0, 2]}.png" %>
+            <%= locale %>
+
+          </div>
+        </td>
+      </tr>
+      <tr class="hidden"></tr>
+      <tr class="hidden localization_versions_row" data-id="<%= lk.id %>">
+        <td class="localization_versions"></td>
+        <td></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

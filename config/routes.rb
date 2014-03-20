@@ -45,5 +45,5 @@ Lit::Engine.routes.draw do
     end
   end
 
-  root :to=>"dashboard#index"
+  root :to=>"localization_keys#index"
 end

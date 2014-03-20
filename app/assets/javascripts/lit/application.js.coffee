@@ -1,5 +1,8 @@
+#= require_self
+
 @edited_rows = {}
 $(document).ready ->
+  console.log "loading localizations..."
   $('td.localization_row[data-editing=0]').on 'click', ->
     $this = $(this)
     if parseInt($this.data('editing'))==0
@@ -20,5 +23,3 @@ $(document).ready ->
     $parent = $this.parents('tr.localization_versions_row')
     $parent.addClass('hidden')
     $parent.children('td').html('')
-  $('tr.localization_key_row').on 'click', 'input.wysiwyg_switch', (e)->
-    $(this).parents('form').find("textarea").jqte()

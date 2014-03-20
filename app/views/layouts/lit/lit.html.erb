@@ -1,0 +1,27 @@
+<%= stylesheet_link_tag    "lit/application", :media => "all" %>
+<%= javascript_include_tag "lit/application" %>
+
+<%#= render 'layouts/lit/navigation' %>
+
+<div id="lit-main" class="container <%= params[:action] %>" role="main">
+  <div class="row-fluid">
+    <% if content_for?(:sidebar) %>
+        <div class="span3">
+          <%= render 'layouts/lit/status' %>
+          <%= yield(:sidebar) %>
+        </div>
+        <div class="span9">
+          <%= render 'layouts/lit/messages' %>
+          <%= yield %>
+        </div>
+    <% else %>
+        <div class="span12">
+          <%= render 'layouts/lit/messages' %>
+          <%= yield %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<%= parent_layout 'application' %>
+
