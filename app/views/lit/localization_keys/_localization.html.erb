@@ -5,7 +5,7 @@
     <tr class="localization_key_row" data-id="<%= localization.id %>">
         <th>
           <%= localization.localization_key %>
-          <span class="badge"><%= Lit.init.cache.get_global_hits_counter(localization.localization_key) %></span>
+          <%= render :partial => "localization_badge", :locals => {:localization => localization} %>
         </th>
         <th>
           <div class="localization_keys_options pull-right">
@@ -24,7 +24,7 @@
       <%- lk = localization_for(locale, localization) %>
       <%- next unless lk %>
       <tr class="localization_locale">
-        <td class="localization_row" width="70%" data-id="<%= lk.id %>" data-edit="<%= edit_localization_key_localization_path(localization, lk) %>" data-editing=0 data-content="">
+        <td class="localization_row <%= 'proposal' unless has_versions?(lk)%>" width="70%" data-id="<%= lk.id %>" data-edit="<%= edit_localization_key_localization_path(localization, lk) %>" data-editing=0 data-content="">
           <%= render :partial => "localization_row", :locals => {:localization => Lit.init.cache["#{locale}.#{localization.localization_key}"]} %>
         </td>
         <td class="locale_row" width="30%" >

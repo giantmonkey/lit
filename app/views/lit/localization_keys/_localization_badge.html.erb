@@ -1,0 +1,1 @@
+<span class="badge <%= 'badge-success' if localization.is_completed %> <%= 'badge-warning' if !localization.is_completed and localization.localizations.changed.count(:id) > 0 %>"><%= localization.localizations.changed.count(:id)%></span>
