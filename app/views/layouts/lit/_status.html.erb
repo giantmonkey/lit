@@ -7,7 +7,7 @@
         </div>
         <div id="collapseOne" class="accordion-body collapse">
           <div class="accordion-inner">
-            <% Lit::Locale.ordered.each do |l| %>
+            <% Lit::Locale.availables.ordered.each do |l| %>
                 <div>
                     <%= image_tag "lit/famfamfam_flags/#{l.locale[0,2]}.png" %>
                     <%= t("lit.locale_to_languages.#{l.locale}", :default=>l.locale) %>:
