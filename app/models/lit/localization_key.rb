@@ -28,7 +28,7 @@ module Lit
 
     def clone_localizations
       new_created = false
-      Lit::Locale.find_each do |locale|
+      Lit::Locale.availables.find_each do |locale|
         self.localizations.where(:locale_id=>locale.id).first_or_create do |l|
           l.default_value = interpolated_key
           new_created = true
