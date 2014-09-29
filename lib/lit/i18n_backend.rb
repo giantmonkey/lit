@@ -69,6 +69,7 @@ module Lit
     end
 
     def store_item(locale, data, scope = [])
+      return unless available_locales.include? locale
       if data.respond_to?(:to_hash)
         data.to_hash.each do |key, value|
           store_item(locale, value, scope + [key])
