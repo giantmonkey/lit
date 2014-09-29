@@ -14,6 +14,11 @@
 .table tbody tr.localization_locale {
   cursor: pointer;
 
+  td {
+    &.proposal {
+      color: #b0b0b0;
+    }
+  }
   &:hover {
     > td {
       background: rgba(199, 199, 199, 0.30);
